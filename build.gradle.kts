@@ -296,6 +296,10 @@ tasks {
         systemProperty("jb.consents.confirmation.enabled", "false")
     }
 
+	buildSearchableOptions {
+        enabled = false
+    }
+
     signPlugin {
         certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
         privateKey.set(System.getenv("PRIVATE_KEY"))
