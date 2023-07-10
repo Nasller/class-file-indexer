@@ -9,15 +9,9 @@ import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 
 buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url = uri("https://plugins.gradle.org/m2/")
-        }
-    }
     dependencies {
-        classpath("org.ow2.asm:asm:9.3")
-        classpath("org.ow2.asm:asm-commons:9.3")
+        classpath("org.ow2.asm:asm:9.5")
+        classpath("org.ow2.asm:asm-commons:9.5")
         classpath("com.guardsquare:proguard-gradle:7.2.2")
     }
 }
@@ -28,19 +22,17 @@ plugins {
     // Java support
     id("java")
     // Kotlin support
-    id("org.jetbrains.kotlin.jvm") version "1.7.10"
+    id("org.jetbrains.kotlin.jvm") version "1.9.0"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.8.0"
+    id("org.jetbrains.intellij") version "1.15.0"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
-    // Gradle Qodana Plugin
-    // id("org.jetbrains.qodana") version "0.1.13"
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
     id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 
-val artifactTypeAttribute = Attribute.of("artifactType", String::class.java)
-val repackagedAttribute = Attribute.of("repackaged", Boolean::class.javaObjectType)
+val artifactTypeAttribute: Attribute<String> = Attribute.of("artifactType", String::class.java)
+val repackagedAttribute: Attribute<Boolean> = Attribute.of("repackaged", Boolean::class.javaObjectType)
 
 val repackage: Configuration by configurations.creating {
     attributes.attribute(repackagedAttribute, true)
@@ -48,10 +40,6 @@ val repackage: Configuration by configurations.creating {
 
 group = properties("pluginGroup")
 version = properties("pluginVersion")
-
-fun getIDEAPath(): String {
-    return properties("localIdeaPath")
-}
 
 // Configure project's dependencies
 abstract class MyRepackager : TransformAction<TransformParameters.None> {
@@ -126,7 +114,7 @@ dependencies {
         to.attribute(repackagedAttribute, true).attribute(artifactTypeAttribute, "jar")
     }
 
-    repackage("org.ow2.asm:asm:9.3")
+    repackage("org.ow2.asm:asm:9.5")
     implementation(files(repackage.files))
 }
 
@@ -136,8 +124,8 @@ intellij {
     pluginName.set(properties("pluginName"))
     version.set(properties("platformVersion"))
     type.set(properties("platformType"))
-    downloadSources.set(properties("platformDownloadSources").toBoolean())
-    updateSinceUntilBuild.set(true)
+    downloadSources.set(true)
+    sandboxDir.set("${rootProject.rootDir}/idea-sandbox")
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
@@ -148,14 +136,6 @@ changelog {
     version.set(properties("pluginVersion"))
     groups.set(emptyList())
 }
-
-// Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
-/*qodana {
-    cachePath.set(projectDir.resolve(".qodana").canonicalPath)
-    reportPath.set(projectDir.resolve("build/reports/inspections").canonicalPath)
-    saveReport.set(true)
-    showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
-}*/
 
 tasks.register<proguard.gradle.ProGuardTask>("proguard") {
     verbose()
@@ -189,7 +169,7 @@ tasks.register<proguard.gradle.ProGuardTask>("proguard") {
     }
 
 //    libraryjars(configurations.runtimeClasspath.get().files)
-    val ideaPath = getIDEAPath()
+//    val ideaPath = getIDEAPath()
 
     // Add all java plugins to classpath
 //    File("$ideaPath/plugins/java/lib").listFiles()!!.forEach { libraryjars(it.absolutePath) }

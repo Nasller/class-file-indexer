@@ -41,7 +41,7 @@ private fun PsiClass.computeInternalName(): String? {
     var anonymousClassId = 1
     var found = false
     containingClass.accept(object : JavaElementVisitor() {
-        override fun visitAnonymousClass(aClass: PsiAnonymousClass?) {
+        override fun visitAnonymousClass(aClass: PsiAnonymousClass) {
             if (!found) {
                 if (aClass === this@computeInternalName) {
                     found = true

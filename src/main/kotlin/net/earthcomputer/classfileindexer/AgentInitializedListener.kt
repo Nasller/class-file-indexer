@@ -4,6 +4,7 @@ import com.intellij.ide.ApplicationInitializedListener
 import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.util.io.isFile
+import kotlinx.coroutines.CoroutineScope
 import net.bytebuddy.agent.ByteBuddyAgent
 import java.io.File
 import java.io.InputStream
@@ -21,7 +22,7 @@ class AgentInitializedListener : ApplicationInitializedListener {
         const val AGENT_CLASS_NAME = "net.earthcomputer.classfileindexer.MyAgent"
     }
 
-    override fun componentsInitialized() {
+    override suspend fun execute(asyncScope: CoroutineScope) {
         val jarFile = File.createTempFile("agent", ".jar")
         val jarPath = jarFile.toPath()
 
