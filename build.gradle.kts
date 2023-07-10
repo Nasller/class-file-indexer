@@ -12,7 +12,7 @@ buildscript {
     dependencies {
         classpath("org.ow2.asm:asm:9.5")
         classpath("org.ow2.asm:asm-commons:9.5")
-        classpath("com.guardsquare:proguard-gradle:7.2.2")
+        classpath("com.guardsquare:proguard-gradle:7.3.2")
     }
 }
 
@@ -158,7 +158,6 @@ tasks.register<proguard.gradle.ProGuardTask>("proguard") {
 //            "$javaHome/jmods/java.base.jmod"
 //        )
 
-    print("javaHome=$javaHome")
     // Add all JDK deps
     if (!properties("skipProguard").toBoolean()) {
         File("$javaHome/jmods/")
@@ -194,7 +193,7 @@ tasks.register<proguard.gradle.ProGuardTask>("proguard") {
 
     printmapping("build/proguard-mapping.txt")
 
-    target("11")
+    target("17")
 
     adaptresourcefilenames()
     optimizationpasses(9)
@@ -274,9 +273,9 @@ tasks {
         if (!properties("skipProguard").toBoolean()) {
             dependsOn("proguard")
             doFirst {
-                val original = File("build/libs/${rootProject.name}-${properties("pluginVersion")}.jar")
+                val original = File("${rootProject.buildDir}/libs/instrumented-${rootProject.name}-${properties("pluginVersion")}.jar")
                 println(original.absolutePath)
-                val obfuscated = File("build/${rootProject.name}-obfuscated.jar")
+                val obfuscated = File("${rootProject.buildDir}/${rootProject.name}-obfuscated.jar")
                 println(obfuscated.absolutePath)
                 if (original.exists() && obfuscated.exists()) {
                     original.delete()
