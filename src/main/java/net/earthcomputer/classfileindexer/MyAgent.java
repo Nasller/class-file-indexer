@@ -1,13 +1,6 @@
 package net.earthcomputer.classfileindexer;
 
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.ClassReader;
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.ClassVisitor;
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.ClassWriter;
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.FieldVisitor;
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Label;
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.MethodVisitor;
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Opcodes;
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Type;
+import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -161,7 +154,7 @@ public class MyAgent implements ClassFileTransformer {
         cr.accept(new HookClassVisitor(cw, interfaceName, interfaceMethod, interfaceMethodDesc, targets), ClassReader.SKIP_FRAMES);
         byte[] bytes = cw.toByteArray();
         if (DEBUG) {
-            Path output = Paths.get("debugTransformerOutput", className.replace("/", File.separator) + ".class").toAbsolutePath();
+            Path output = Paths.get(System.getProperty("user.home"),"/Desktop/debugTransformerOutput", className.replace("/", File.separator) + ".class").toAbsolutePath();
             try {
                 if (!Files.exists(output.getParent())) {
                     Files.createDirectories(output.getParent());

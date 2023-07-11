@@ -27,8 +27,6 @@ plugins {
     id("org.jetbrains.intellij") version "1.15.0"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
-    // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
-    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 
 val artifactTypeAttribute: Attribute<String> = Attribute.of("artifactType", String::class.java)
@@ -235,6 +233,10 @@ tasks {
         withType<KotlinCompile> {
             kotlinOptions.jvmTarget = it
         }
+    }
+
+    jar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 
     wrapper {
