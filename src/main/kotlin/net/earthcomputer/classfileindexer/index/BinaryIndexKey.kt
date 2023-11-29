@@ -1,4 +1,4 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.index
 
 import com.intellij.util.io.DataInputOutputUtil
 import java.io.DataInput

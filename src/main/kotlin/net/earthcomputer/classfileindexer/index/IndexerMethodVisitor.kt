@@ -1,17 +1,11 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.index
 
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.AnnotationVisitor
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Handle
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Label
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.MethodVisitor
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Opcodes
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Type
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.TypePath
+import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.*
 
 class IndexerMethodVisitor(
-    private val cv: IndexerClassVisitor,
-    private val access: Int,
-    private val desc: String
+	private val cv: IndexerClassVisitor,
+	private val access: Int,
+	private val desc: String
 ) : MethodVisitor(Opcodes.ASM9) {
     private val insns = mutableListOf<Insn>()
 

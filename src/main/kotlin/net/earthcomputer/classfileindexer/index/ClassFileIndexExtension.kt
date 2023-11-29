@@ -1,15 +1,12 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.index
 
 import com.intellij.ide.highlighter.JavaClassFileType
 import com.intellij.openapi.progress.ProgressManager
-import com.intellij.util.indexing.DataIndexer
-import com.intellij.util.indexing.DefaultFileTypeSpecificInputFilter
-import com.intellij.util.indexing.FileBasedIndexExtension
-import com.intellij.util.indexing.FileContent
-import com.intellij.util.indexing.ID
+import com.intellij.util.indexing.*
 import com.intellij.util.io.DataExternalizer
 import com.intellij.util.io.DataInputOutputUtil
 import com.intellij.util.io.KeyDescriptor
+import net.earthcomputer.classfileindexer.SmartMap
 import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.ClassReader
 import java.io.DataInput
 import java.io.DataOutput

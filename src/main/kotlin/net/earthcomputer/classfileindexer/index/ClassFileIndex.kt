@@ -1,4 +1,4 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.index
 
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.util.RecursionManager

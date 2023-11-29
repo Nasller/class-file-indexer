@@ -1,11 +1,8 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.search.clazz
 
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiField
-import com.intellij.psi.PsiReferenceExpression
-import com.intellij.psi.SmartPsiElementPointer
+import com.intellij.psi.*
 import com.intellij.psi.util.PsiUtil
+import net.earthcomputer.classfileindexer.search.DecompiledSourceElementLocator
 
 class FieldLocator(
     private val fieldPtr: SmartPsiElementPointer<PsiField>,

@@ -1,17 +1,18 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.search.implicit
 
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.CommonClassNames
-import com.intellij.psi.JavaPsiFacade
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiCompiledFile
-import com.intellij.psi.PsiExpression
-import com.intellij.psi.PsiType
-import com.intellij.psi.SmartPointerManager
+import com.intellij.psi.*
 import com.intellij.psi.search.searches.ClassInheritorsSearch
 import com.intellij.psi.search.searches.ImplicitToStringSearch
 import com.intellij.util.Processor
 import com.intellij.util.QueryExecutor
+import net.earthcomputer.classfileindexer.findCompiledFileWithoutSources
+import net.earthcomputer.classfileindexer.index.ClassFileIndex
+import net.earthcomputer.classfileindexer.index.ImplicitToStringKey
+import net.earthcomputer.classfileindexer.internalName
+import net.earthcomputer.classfileindexer.runReadActionInSmartModeWithWritePriority
+import net.earthcomputer.classfileindexer.search.DecompiledSourceElementLocator
+import net.earthcomputer.classfileindexer.search.FakeDecompiledElement
 
 class ImplicitToStringSearchExtension : QueryExecutor<PsiExpression, ImplicitToStringSearch.SearchParameters> {
     override fun execute(

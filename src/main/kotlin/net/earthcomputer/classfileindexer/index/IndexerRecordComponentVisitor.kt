@@ -1,11 +1,11 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.index
 
 import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.AnnotationVisitor
-import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.FieldVisitor
 import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Opcodes
+import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.RecordComponentVisitor
 import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.TypePath
 
-class IndexerFieldVisitor(private val cv: IndexerClassVisitor) : FieldVisitor(Opcodes.ASM9) {
+class IndexerRecordComponentVisitor(private val cv: IndexerClassVisitor) : RecordComponentVisitor(Opcodes.ASM9) {
     override fun visitAnnotation(descriptor: String, visible: Boolean): AnnotationVisitor {
         cv.addTypeDescriptor(descriptor)
         return IndexerAnnotationVisitor(cv)

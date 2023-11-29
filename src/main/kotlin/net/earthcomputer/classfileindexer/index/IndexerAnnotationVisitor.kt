@@ -1,4 +1,4 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.index
 
 import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.AnnotationVisitor
 import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Opcodes

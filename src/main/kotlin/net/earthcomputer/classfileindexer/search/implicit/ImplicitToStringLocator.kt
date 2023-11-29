@@ -1,15 +1,8 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.search.implicit
 
-import com.intellij.psi.CommonClassNames
-import com.intellij.psi.JavaTokenType
-import com.intellij.psi.PsiAssignmentExpression
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiClassType
-import com.intellij.psi.PsiExpression
-import com.intellij.psi.PsiPolyadicExpression
-import com.intellij.psi.PsiType
-import com.intellij.psi.SmartPsiElementPointer
+import com.intellij.psi.*
 import com.intellij.psi.util.InheritanceUtil
+import net.earthcomputer.classfileindexer.search.DecompiledSourceElementLocator
 
 class ImplicitToStringLocator(
     private val baseClassPtr: SmartPsiElementPointer<PsiClass>,

@@ -1,17 +1,20 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.search.method
 
-import com.intellij.psi.PsiCompiledFile
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiModifier
-import com.intellij.psi.PsiReference
-import com.intellij.psi.PsiSubstitutor
-import com.intellij.psi.SmartPointerManager
+import com.intellij.psi.*
 import com.intellij.psi.search.searches.ClassInheritorsSearch
 import com.intellij.psi.search.searches.MethodReferencesSearch
 import com.intellij.psi.util.MethodSignatureUtil
 import com.intellij.psi.util.TypeConversionUtil
 import com.intellij.util.Processor
 import com.intellij.util.QueryExecutor
+import net.earthcomputer.classfileindexer.descriptor
+import net.earthcomputer.classfileindexer.findCompiledFileWithoutSources
+import net.earthcomputer.classfileindexer.index.ClassFileIndex
+import net.earthcomputer.classfileindexer.index.MethodIndexKey
+import net.earthcomputer.classfileindexer.internalName
+import net.earthcomputer.classfileindexer.runReadActionInSmartModeWithWritePriority
+import net.earthcomputer.classfileindexer.search.DecompiledSourceElementLocator
+import net.earthcomputer.classfileindexer.search.FakeDecompiledElement
 
 class MethodReferencesSearchExtension : QueryExecutor<PsiReference, MethodReferencesSearch.SearchParameters> {
     override fun execute(

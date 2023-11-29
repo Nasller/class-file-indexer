@@ -1,4 +1,4 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.search
 
 import com.intellij.ide.highlighter.JavaHighlightingColors
 import com.intellij.ide.util.EditorHelper
@@ -6,11 +6,7 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.markup.TextAttributes
 import com.intellij.openapi.util.TextRange
 import com.intellij.pom.Navigatable
-import com.intellij.psi.PsiCompiledFile
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiJavaFile
-import com.intellij.psi.PsiReference
-import com.intellij.psi.PsiReferenceBase
+import com.intellij.psi.*
 import com.intellij.psi.impl.FakePsiElement
 import com.intellij.usageView.UsageTreeColors
 import com.intellij.usageView.UsageTreeColorsScheme
@@ -18,6 +14,9 @@ import com.intellij.usageView.UsageViewUtil
 import com.intellij.usages.TextChunk
 import com.intellij.usages.UsageInfo2UsageAdapter
 import com.intellij.usages.impl.UsagePreviewPanel
+import net.earthcomputer.classfileindexer.IHasCustomDescription
+import net.earthcomputer.classfileindexer.IHasNavigationOffset
+import net.earthcomputer.classfileindexer.isPrimitive
 import net.earthcomputer.classfileindexer.libs.org.objectweb.asm.Type
 import java.util.stream.Collectors
 

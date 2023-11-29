@@ -1,15 +1,9 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.search.method
 
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiMethod
-import com.intellij.psi.PsiMethodCallExpression
-import com.intellij.psi.PsiMethodReferenceExpression
-import com.intellij.psi.PsiModifier
-import com.intellij.psi.PsiNewExpression
-import com.intellij.psi.SmartPsiElementPointer
+import com.intellij.psi.*
 import com.intellij.psi.util.InheritanceUtil
 import com.intellij.psi.util.MethodSignatureUtil
+import net.earthcomputer.classfileindexer.search.DecompiledSourceElementLocator
 
 class MethodLocator(
     private val methodPtr: SmartPsiElementPointer<PsiMethod>,

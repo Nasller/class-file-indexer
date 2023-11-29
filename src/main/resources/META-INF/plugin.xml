@@ -12,9 +12,9 @@
         <!--suppress PluginXmlValidity (internal API) -->
         <applicationInitializedListener implementation="net.earthcomputer.classfileindexer.AgentInitializedListener"/>
 
-        <fileBasedIndex implementation="net.earthcomputer.classfileindexer.ClassFileIndexExtension"/>
-        <referencesSearch implementation="net.earthcomputer.classfileindexer.ReferencesSearchExtension"/>
-        <methodReferencesSearch implementation="net.earthcomputer.classfileindexer.MethodReferencesSearchExtension"/>
-        <implicitToStringSearch implementation="net.earthcomputer.classfileindexer.ImplicitToStringSearchExtension"/>
+        <fileBasedIndex implementation="net.earthcomputer.classfileindexer.index.ClassFileIndexExtension"/>
+        <referencesSearch implementation="net.earthcomputer.classfileindexer.search.clazz.ReferencesSearchExtension"/>
+        <methodReferencesSearch implementation="net.earthcomputer.classfileindexer.search.method.MethodReferencesSearchExtension"/>
+        <implicitToStringSearch implementation="net.earthcomputer.classfileindexer.search.implicit.ImplicitToStringSearchExtension"/>
     </extensions>
 </idea-plugin>

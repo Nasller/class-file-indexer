@@ -1,17 +1,21 @@
-package net.earthcomputer.classfileindexer
+package net.earthcomputer.classfileindexer.search.clazz
 
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiCompiledFile
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiField
-import com.intellij.psi.PsiReference
-import com.intellij.psi.SmartPointerManager
+import com.intellij.psi.*
 import com.intellij.psi.search.SearchScope
 import com.intellij.psi.search.searches.ClassInheritorsSearch
 import com.intellij.psi.search.searches.ReferencesSearch
 import com.intellij.util.Processor
 import com.intellij.util.QueryExecutor
+import net.earthcomputer.classfileindexer.IIsWriteOverride
+import net.earthcomputer.classfileindexer.findCompiledFileWithoutSources
+import net.earthcomputer.classfileindexer.index.ClassFileIndex
+import net.earthcomputer.classfileindexer.index.ClassIndexKey
+import net.earthcomputer.classfileindexer.index.FieldIndexKey
+import net.earthcomputer.classfileindexer.internalName
+import net.earthcomputer.classfileindexer.runReadActionInSmartModeWithWritePriority
+import net.earthcomputer.classfileindexer.search.DecompiledSourceElementLocator
+import net.earthcomputer.classfileindexer.search.FakeDecompiledElement
 
 class ReferencesSearchExtension : QueryExecutor<PsiReference, ReferencesSearch.SearchParameters> {
     override fun execute(
